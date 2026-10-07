@@ -1,0 +1,211 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PANDA · sistema visual compartido (estrategias, planificaciones, reportes)
+   Fuente: manual Recursos.pdf · BRANDING 2026 + el deck de propuestas (referencia).
+   Todos los documentos salen con esta paleta: no hay colores por cliente.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --negro: #191919;    /* NEUTRO */
+  --blanco: #ffffff;   /* PRIMARIO */
+  --acento: #fe572a;   /* PRIMARIO · rojo, acento único */
+  --rosa: #ffc0af;     /* PRIMARIO */
+  --ladrillo: #e25a26; /* SECUNDARIO */
+  --amarillo: #f6ca1f; /* ACENTO, uso puntual */
+  --verde: #a5bf57;    /* SECUNDARIO (errata del manual: el hex correcto es este) */
+  --gris: #7a7a7a;
+
+  /* ── modo claro: base blanca, texto negro. Todo el sistema lee estos tokens ── */
+  --bg: var(--blanco);
+  --fg: var(--negro);
+  --sub: rgb(25 25 25 / 0.62);        /* texto secundario */
+  --sub-fuerte: rgb(25 25 25 / 0.82); /* copy largo */
+  --panel: #f5f3f0;                   /* paneles, visor, celdas */
+  --campo: #efece8;                   /* inputs, comentarios */
+  --linea: rgb(25 25 25 / 0.14);
+  --linea-suave: rgb(25 25 25 / 0.08);
+  --borde: rgb(25 25 25 / 0.3);       /* botón ghost, switch */
+  --sombra: 0 16px 48px rgb(25 25 25 / 0.12), inset 0 0 0 1px var(--linea-suave);
+
+  /* estados de pieza, un solo vocabulario, con colores del manual */
+  --ok: var(--verde);
+  --revision: var(--amarillo);
+  --coment: var(--acento);
+
+  --display: var(--f-display), var(--f-texto), sans-serif;
+  --serif: var(--f-serif), ui-monospace, monospace;
+  --texto: var(--f-texto), system-ui, sans-serif;
+  --monof: var(--f-mono), ui-monospace, monospace;
+
+  --pad: clamp(28px, 6vw, 96px);  /* padding de slide */
+  --m: clamp(20px, 3vw, 44px);    /* margen del foliado */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--texto);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
+}
+a { color: inherit; }
+button { font: inherit; color: inherit; cursor: pointer; }
+img { display: block; max-width: 100%; }
+h1, h2, h3, p, ul, ol, dl, dd { margin: 0; }
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.96;
+}
+::selection { background: var(--acento); color: var(--blanco); }
+
+/* ── rótulo en mono ── */
+.rotulo {
+  font-family: var(--monof);
+  font-size: clamp(10.5px, 0.85vw, 12px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ── tag: "/ texto /_" sobre rojo ── */
+.tag {
+  display: inline-block;
+  width: fit-content;
+  background: var(--acento);
+  color: var(--blanco);
+  font-family: var(--serif);
+  font-size: clamp(12px, 1.05vw, 15px);
+  letter-spacing: 0.02em;
+  padding: 4px 16px 5px;
+  white-space: nowrap;
+}
+.tag::before { content: "/ "; }
+.tag::after { content: " /_"; }
+.tag.hueco { background: transparent; color: var(--acento); border: 1px solid var(--acento); }
+
+/* ── serif de acento (PP Mondwest): bajadas cortas y firmas ── */
+.serif { font-family: var(--serif); font-size: clamp(17px, 1.9vw, 27px); line-height: 1.35; }
+
+/* ── rótulos verticales + folio (estilo deck) ── */
+.lbl {
+  position: absolute;
+  left: clamp(14px, 2.4vw, 34px);
+  font-family: var(--monof);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  z-index: 2;
+}
+.lbl.top { top: var(--m); }
+.lbl.bot { bottom: var(--m); font-weight: 500; opacity: 0.9; }
+.num {
+  position: absolute;
+  right: var(--m);
+  bottom: var(--m);
+  font-family: var(--monof);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  opacity: 0.5;
+  z-index: 2;
+}
+
+/* ── titular sangrado con eco rojo ── */
+.bleed {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.8;
+  font-size: clamp(64px, 20vw, 430px);
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+  margin-left: -0.055em;
+  text-transform: uppercase;
+}
+.glow-rojo { filter: drop-shadow(0 0 0.006em rgb(254 87 42 / 0.6)) drop-shadow(0 0 0.04em rgb(254 87 42 / 0.28)); }
+.glow-sutil { filter: drop-shadow(0 0 5px rgb(254 87 42 / 0.35)); }
+
+/* ── textura de tinta roja (fondo) ── */
+.tex {
+  position: absolute;
+  inset: 0;
+  background: url("/brand/textura-tinta-roja.webp") center / cover no-repeat;
+  /* la textura original es tinta roja sobre negro: en modo claro se invierte a tinta rosada
+     sobre blanco (invert + hue-rotate) y se multiplica con el fondo */
+  filter: invert(1) hue-rotate(180deg);
+  mix-blend-mode: multiply;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+.tex.suave { opacity: 0.22; }
+
+/* ── marca de agua vertical ── */
+.wmark {
+  position: absolute;
+  left: clamp(-10px, -0.6vw, 6px);
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-family: var(--display);
+  letter-spacing: -0.02em;
+  font-size: clamp(150px, 25vh, 340px);
+  line-height: 0.82;
+  color: rgb(25 25 25 / 0.05);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* ── botones ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  background: var(--acento);
+  color: var(--negro);
+  text-decoration: none;
+  font-family: var(--display);
+  font-size: clamp(15px, 1.2vw, 18px);
+  padding: 10px 26px;
+  border-radius: 99px;
+  border: 1px solid var(--acento);
+  transition: transform 200ms var(--ease), border-color 200ms, color 200ms, background-color 200ms;
+}
+.btn:hover:not(:disabled) { transform: translateY(-2px) scale(1.02); }
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--borde); }
+.btn.ghost:hover:not(:disabled) { border-color: var(--acento); color: var(--acento); }
+.btn.ok { background: var(--ok); border-color: var(--ok); color: var(--negro); }
+.btn.chico { min-height: 36px; padding: 6px 16px; font-size: 14px; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ── reveal al entrar en pantalla ── */
+.rv { opacity: 0; transform: translateY(22px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.on .rv { opacity: 1; transform: none; }
+.on .rv.d1 { transition-delay: 0.12s; }
+.on .rv.d2 { transition-delay: 0.24s; }
+.on .rv.d3 { transition-delay: 0.36s; }
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1; transform: none; transition: none; }
+}
+
+@media (max-width: 860px) {
+  .lbl { display: none; }
+}
+@media print {
+  .rv { opacity: 1 !important; transform: none !important; }
+}
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }

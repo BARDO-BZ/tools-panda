@@ -1,0 +1,153 @@
+{
+  "tipo": "estrategia",
+  "cliente": "Cliente Ejemplo",
+  "titulo": "Estrategia semestral",
+  "periodo": "2° semestre 2026",
+  "fecha": "2026-07",
+  "bloques": [
+    {
+      "tipo": "portada",
+      "label": "Portada",
+      "kicker": "Cliente Ejemplo × Panda",
+      "titulo": "Estrategia semestral",
+      "bajada": "2° semestre 2026"
+    },
+    {
+      "tipo": "semestre-anterior",
+      "label": "De dónde veníamos",
+      "titulo": "Semestre anterior",
+      "periodo": "De febrero a julio",
+      "objetivos": ["Primer objetivo del semestre.", "Segundo objetivo.", "Tercer objetivo."],
+      "estrategia": {
+        "resumen": "La idea que resume la estrategia del semestre en una línea",
+        "items": [
+          { "titulo": "Primer eje", "texto": "Qué se hizo en este eje." },
+          { "titulo": "Segundo eje", "texto": "Qué se hizo en este eje." }
+        ]
+      },
+      "metas": [
+        { "canal": "Instagram", "meta": "Meta +300 nuevos seguidores", "logro": "+450", "porcentaje": "150%" },
+        { "canal": "LinkedIn", "meta": "Meta +200 nuevos seguidores", "logro": "+120", "porcentaje": "60%" }
+      ]
+    },
+    {
+      "tipo": "columnas",
+      "label": "Lo que pasó",
+      "titulo": "Lo que logramos",
+      "columnas": [
+        { "titulo": "Eje uno", "diagnostico": "Cómo funcionó, en una frase.", "detalle": "Un poco más de contexto.", "hoy": "El dato concreto de hoy." },
+        { "titulo": "Eje dos", "diagnostico": "Cómo funcionó, en una frase.", "detalle": "Un poco más de contexto.", "hoy": "El dato concreto de hoy." },
+        { "titulo": "Eje tres", "detalle": "El diagnóstico es opcional en cada columna.", "hoy": "El dato concreto de hoy." }
+      ],
+      "banda": { "label": "Evolución principal", "texto": "La frase que resume cómo evolucionó la comunicación." }
+    },
+    {
+      "tipo": "metricas",
+      "label": "Crecimiento",
+      "titulo": "Crecimiento",
+      "canales": [
+        {
+          "canal": "Instagram",
+          "tiles": [
+            { "valor": "50K", "label": "Visualizaciones", "referencia": "+40% vs. período anterior" },
+            { "valor": "+450", "label": "Seguidores sumados", "referencia": "mejor mes: junio" },
+            { "valor": "~35%", "label": "No seguidores", "referencia": "alcance nuevo" },
+            { "valor": "10K", "label": "Visualizaciones/mes", "referencia": "promedio" }
+          ]
+        },
+        {
+          "canal": "Newsletter",
+          "tiles": [
+            { "valor": "98%", "label": "Entrega", "referencia": "base saludable" },
+            { "valor": "30%", "label": "Apertura", "referencia": "buen nivel" },
+            { "valor": "2%", "label": "CTOR", "referencia": "clics sobre aperturas" },
+            { "valor": "4", "label": "Envíos", "referencia": "en el período" }
+          ]
+        }
+      ],
+      "nota": "Nota opcional al pie (ej. si las ventanas de tiempo se superponen)."
+    },
+    {
+      "tipo": "desafio",
+      "label": "El nuevo desafío",
+      "titulo": "Próximo semestre",
+      "antes": { "label": "Semestre anterior", "texto": "El foco que tenía la comunicación." },
+      "despues": { "label": "Nuevo semestre", "texto": "El foco nuevo." },
+      "ejes": [
+        { "titulo": "Eje uno", "texto": "De qué se trata.", "kpis": ["Un KPI medible", "Otro KPI"] },
+        { "titulo": "Eje dos", "texto": "De qué se trata.", "kpis": ["Un KPI medible"] },
+        { "titulo": "Eje tres", "texto": "De qué se trata.", "kpis": ["Un KPI medible"] }
+      ],
+      "kpiGeneral": { "texto": "El objetivo general del semestre.", "embudo": "Visibilidad → autoridad → consultas" }
+    },
+    {
+      "tipo": "territorios",
+      "label": "Territorios y próximos pasos",
+      "titulo": "Territorios",
+      "territorios": [
+        { "titulo": "Territorio uno", "texto": "Qué temas entran." },
+        { "titulo": "Territorio dos", "texto": "Qué temas entran." },
+        { "titulo": "Territorio tres", "texto": "Qué temas entran." },
+        { "titulo": "Territorio cuatro", "texto": "Qué temas entran." }
+      ],
+      "pasosTitulo": "Próximos pasos",
+      "pasos": ["Primer paso.", "Segundo paso.", "Tercer paso."]
+    },
+    { "tipo": "seccion", "label": "Sección", "numero": "02", "titulo": "Hacia dónde vamos", "items": ["El giro", "El recorrido", "Posicionamiento"] },
+    {
+      "tipo": "comparacion",
+      "label": "Antes y ahora",
+      "kicker": "proceso de trabajo",
+      "titulo": "Cómo cambió el proceso",
+      "antes": { "label": "antes", "items": ["Cómo era el proceso.", "Otro punto."], "nota": "Nota opcional." },
+      "ahora": { "label": "ahora", "items": ["Cómo es ahora.", "Otro punto."] }
+    },
+    {
+      "tipo": "lista",
+      "label": "Aprendizajes",
+      "kicker": "aprendizajes",
+      "titulo": "Lo que aprendimos",
+      "items": [{ "titulo": "Título opcional", "texto": "El aprendizaje." }, { "texto": "Otro aprendizaje, sin título." }],
+      "conclusion": "Conclusión opcional al pie."
+    },
+    {
+      "tipo": "cita",
+      "label": "El giro",
+      "kicker": "el giro estratégico",
+      "cita": "La frase que resume el cambio de foco.",
+      "pie": [
+        { "label": "Antes", "texto": "Cómo estaba organizada la estrategia." },
+        { "label": "Ahora", "texto": "Cómo se organiza ahora." }
+      ]
+    },
+    {
+      "tipo": "tabla",
+      "label": "Pilares",
+      "kicker": "pilares de contenido",
+      "titulo": "Pilares de contenido",
+      "bajada": "Cada pilar con su etapa y su canal.",
+      "columnas": ["Pilar", "Etapa", "Canal"],
+      "filas": [
+        ["Pilar uno", "Descubrir", "Instagram"],
+        ["Pilar dos", "Confiar", "Instagram + newsletter"]
+      ]
+    },
+    {
+      "tipo": "grilla",
+      "label": "KPIs por etapa",
+      "kicker": "kpis por etapa",
+      "titulo": "KPIs por etapa",
+      "items": [
+        { "titulo": "Descubrir", "lineas": ["% de alcance a no seguidores", "Guardados y compartidos"] },
+        { "titulo": "Confiar", "lineas": ["Nuevos seguidores", "Apertura del newsletter"] },
+        { "titulo": "Convertir", "subtitulo": "Subtítulo opcional", "lineas": ["Consultas"] }
+      ]
+    },
+    {
+      "tipo": "cierre",
+      "label": "Gracias",
+      "titulo": "Gracias",
+      "frase": "La frase de posicionamiento para cerrar."
+    }
+  ]
+}

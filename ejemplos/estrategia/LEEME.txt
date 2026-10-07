@@ -1,0 +1,28 @@
+ESTRATEGIA · cómo armar el ZIP para subir a Panda
+==================================================
+
+El ZIP lleva un solo archivo: contenido.json (las estrategias no llevan imágenes).
+Editalo con cualquier editor de texto y volvé a comprimirlo.
+
+CAMPOS GENERALES
+  tipo       "estrategia" (no cambiar)
+  titulo     ej. "Estrategia semestral"
+  periodo    ej. "2° semestre 2026"
+  fecha      año y mes con el que se ordena en la carpeta del cliente: "2026-07"
+  cliente    opcional: al subir se usa el nombre de la carpeta
+
+BLOQUES
+  "bloques" es la lista de placas, en orden. Cada bloque tiene un "tipo".
+  El ejemplo trae los 13 tipos: dejá los que necesites, en el orden que cuente mejor la
+  historia, y borrá el resto. Lo habitual:
+    portada · semestre-anterior · columnas · metricas · desafio · territorios · cierre
+
+  Cada bloque puede llevar además:
+    "label"   nombre de la placa (aparece en el rótulo vertical)
+    "notas"   notas para quien presenta (no se muestran)
+    "fondo"   para forzar el color: "blanco" | "negro" | "rosa" | "rojo"
+
+OJO
+  · Comillas rectas ("), no tipográficas (“ ”). Comas entre elementos, sin coma al final.
+  · No uses el guion largo (–) en bajadas, períodos o frases: la tipografía serif no lo tiene.
+  · Si algo está mal, al soltar el ZIP la web te dice qué y dónde, antes de publicar.

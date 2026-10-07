@@ -1,0 +1,68 @@
+# Supabase de Panda: puesta en marcha
+
+Sin estas variables la app corre en **modo local** (datos en `.data/`, sin mails). Para usarla
+con clientes de verdad hace falta el proyecto de Supabase. Son ~15 minutos.
+
+## 1 · Crear el proyecto
+
+1. [supabase.com](https://supabase.com) → cuenta nueva de Panda → **New project**.
+2. Nombre `tools-panda`, región **South America (São Paulo)**, contraseña de base fuerte
+   (guardarla en 1Password; la app no la usa).
+
+## 2 · Correr el esquema
+
+**SQL Editor → New query**, pegar `supabase/schema.sql` entero y **Run**. Crea las tablas
+(clientes, perfiles, accesos, documentos, comentarios, aprobaciones, cierres) y el bucket
+privado `documentos`. Se puede volver a correr sin perder datos.
+
+## 3 · Configurar el login
+
+**Authentication → Sign In / Providers → Email**: activo. Desactivar **Allow new users to sign up**:
+nadie se registra solo, los usuarios los crea el equipo.
+
+**Authentication → URL Configuration**
+
+- Site URL: la URL de producción (ej. `https://clientes.panda.bz`)
+- Redirect URLs: agregar `https://clientes.panda.bz/auth/confirmar` y `http://localhost:3000/auth/confirmar`
+
+**Authentication → Emails → Templates**: cambiar el link de estas dos plantillas para que el
+link funcione aunque el mail se abra en otro dispositivo (el celular, por ejemplo):
+
+- **Magic Link**: `{{ .SiteURL }}/auth/confirmar?token_hash={{ .TokenHash }}&type=email`
+- **Invite user**: `{{ .SiteURL }}/auth/confirmar?token_hash={{ .TokenHash }}&type=invite`
+
+De paso, traducir el asunto y el texto ("Entrá a Panda", "Te invitaron a Panda").
+
+**SMTP propio (antes de invitar clientes):** el mail que trae Supabase de fábrica manda muy
+pocos por hora y suele caer en spam. En **Authentication → Emails → SMTP Settings** cargar un
+proveedor (Resend, Postmark o el SMTP de Google Workspace) con un remitente tipo
+`hola@panda.bz`.
+
+## 4 · Variables
+
+**Project Settings → API Keys / Data API**. En `.env.local` (desarrollo) y en Vercel (producción):
+
+```
+NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...      # "anon" / publishable
+SUPABASE_SERVICE_ROLE_KEY=eyJ...          # "service_role" / secret: NUNCA al navegador ni al repo
+SITE_URL=https://clientes.panda.bz        # en local: http://localhost:3000
+```
+
+La anon key puede ser pública: con RLS activo y sin policies no lee ni escribe nada.
+
+## 5 · Primer usuario y migración
+
+```bash
+npm run admin -- crear-usuario --mail vos@panda.bz --nombre "Tu nombre" --rol panda
+npm run admin -- migrar migracion     # sube los documentos del piloto (Sumatoria)
+```
+
+Llega la invitación por mail → entrar → desde **/panda/usuarios** se crea el resto.
+
+## 6 · Verificar
+
+- `/entrar` con un mail que **no** existe: dice "revisá tu mail" pero no llega nada (está bien:
+  no revela quién tiene cuenta).
+- Un usuario cliente solo ve su carpeta; `/panda` le da 404.
+- Abrir una placa (`/api/archivos/...`) sin sesión: 404.

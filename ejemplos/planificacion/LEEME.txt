@@ -1,0 +1,39 @@
+PLANIFICACIÓN · cómo armar el ZIP para subir a Panda
+=====================================================
+
+El ZIP lleva:
+  contenido.json      los datos del mes y de cada pieza
+  las placas          en la carpeta que quieras dentro del ZIP (acá van en placas/)
+
+PLACAS
+  · Feed (carruseles, posteos): 3:4 → 1080 × 1440
+  · Stories y reels: 9:16 → 1080 × 1920 (del reel va la portada; el video, como link)
+  · PNG, JPG o WEBP. Al subir se pasan solas a webp liviano.
+  · Nombres sin espacios ni acentos. Convención: p01-1.webp, p01-2.webp… (pieza 01, placa 1)
+    y s01-1.webp… para stories. El nombre tiene que coincidir con el de "placas" en el JSON.
+
+CAMPOS DEL MES
+  tipo            "planificacion" (no cambiar)
+  titulo          ej. "Planificación de redes"
+  periodo         ej. "Noviembre 2026"
+  mes             "2026-11" (año-mes; ordena la carpeta del cliente)
+  feedbackHasta   fecha límite para que el cliente comente: "2026-11-05"
+  cliente         opcional: al subir se usa el nombre de la carpeta
+
+CAMPOS DE CADA PIEZA (publicaciones y stories)
+  id         único y estable: p01, p02… / s01, s02…  ⚠ no lo cambies al re-subir una
+             versión corregida: los comentarios y aprobaciones están atados al id
+  numero     el que se ve: "Pieza 01"
+  fecha      "2026-11-03"
+  formato    carrusel | posteo | reel | story   (en stories, siempre "story")
+  titulo     obligatorio
+  placas     lista de nombres de archivo, en orden
+  opcionales: redes, eje, objetivo, copy, cta, hashtags, links
+
+EDITAR
+  En la web, "Editar" en el documento → soltás el ZIP corregido completo (con todas las
+  placas). Reemplaza la versión anterior.
+
+OJO
+  · Comillas rectas ("), no tipográficas (“ ”). Comas entre elementos, sin coma al final.
+  · Si algo está mal, al soltar el ZIP la web te dice qué y dónde, antes de publicar.

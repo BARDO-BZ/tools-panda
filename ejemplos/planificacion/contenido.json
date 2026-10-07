@@ -1,0 +1,50 @@
+{
+  "tipo": "planificacion",
+  "cliente": "Cliente Ejemplo",
+  "titulo": "Planificación de redes",
+  "periodo": "Noviembre 2026",
+  "mes": "2026-11",
+  "feedbackHasta": "2026-11-05",
+  "publicaciones": [
+    {
+      "id": "p01",
+      "numero": 1,
+      "fecha": "2026-11-03",
+      "formato": "carrusel",
+      "titulo": "Título de la pieza",
+      "redes": ["Instagram", "LinkedIn"],
+      "eje": "Nombre del eje",
+      "objetivo": "Objetivo de la pieza (opcional)",
+      "copy": "Primer párrafo del copy.\n\nSegundo párrafo. Los saltos de línea van con \\n.",
+      "cta": "Escribinos y te contamos cómo avanzar.",
+      "hashtags": ["ejemplo", "panda"],
+      "placas": ["p01-1.webp", "p01-2.webp", "p01-3.webp"]
+    },
+    {
+      "id": "p02",
+      "numero": 2,
+      "fecha": "2026-11-10",
+      "formato": "posteo",
+      "titulo": "Un posteo de una sola placa",
+      "redes": ["Instagram"],
+      "eje": "Nombre del eje",
+      "copy": "El copy del posteo.",
+      "placas": ["p02-1.webp"]
+    },
+    {
+      "id": "p03",
+      "numero": 3,
+      "fecha": "2026-11-17",
+      "formato": "reel",
+      "titulo": "Un reel",
+      "redes": ["Instagram"],
+      "copy": "El copy del reel.",
+      "links": [{ "label": "Ver video", "url": "https://drive.google.com/..." }],
+      "placas": ["p03-1.webp"]
+    }
+  ],
+  "stories": [
+    { "id": "s01", "numero": 1, "fecha": "2026-11-04", "formato": "story", "titulo": "Una secuencia de dos stories", "eje": "Nombre del eje", "placas": ["s01-1.webp", "s01-2.webp"] },
+    { "id": "s02", "numero": 2, "fecha": "2026-11-12", "formato": "story", "titulo": "Una story suelta", "eje": "Nombre del eje", "placas": ["s02-1.webp"] }
+  ]
+}
