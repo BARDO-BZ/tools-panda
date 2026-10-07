@@ -28,8 +28,12 @@ nadie se registra solo, los usuarios los crea el equipo.
 **Authentication → Emails → Templates**: cambiar el link de estas dos plantillas para que el
 link funcione aunque el mail se abra en otro dispositivo (el celular, por ejemplo):
 
-- **Magic Link**: `{{ .SiteURL }}/auth/confirmar?token_hash={{ .TokenHash }}&type=email`
-- **Invite user**: `{{ .SiteURL }}/auth/confirmar?token_hash={{ .TokenHash }}&type=invite`
+- **Magic Link**: `{{ .RedirectTo }}?token_hash={{ .TokenHash }}&type=email`
+- **Invite user**: `{{ .RedirectTo }}?token_hash={{ .TokenHash }}&type=invite`
+
+`{{ .RedirectTo }}` es la dirección que manda la app en cada pedido (`SITE_URL` + `/auth/confirmar`),
+así el mismo proyecto sirve para local y producción sin tocar nada. Por eso las dos URLs tienen
+que estar en *Redirect URLs*: si no, Supabase manda al Site URL del panel.
 
 De paso, traducir el asunto y el texto ("Entrá a Panda", "Te invitaron a Panda").
 
@@ -44,9 +48,9 @@ proveedor (Resend, Postmark o el SMTP de Google Workspace) con un remitente tipo
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...      # "anon" / publishable
-SUPABASE_SERVICE_ROLE_KEY=eyJ...          # "service_role" / secret: NUNCA al navegador ni al repo
-SITE_URL=https://clientes.panda.bz        # en local: http://localhost:3000
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_...   # "Publishable key" (o la "anon" en formato viejo)
+SUPABASE_SERVICE_ROLE_KEY=sb_secret_...           # "Secret key" (o "service_role"): NUNCA al navegador ni al repo
+SITE_URL=http://localhost:3000            # en .env.local; en Vercel, la URL de producción
 ```
 
 La anon key puede ser pública: con RLS activo y sin policies no lee ni escribe nada.

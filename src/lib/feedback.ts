@@ -18,7 +18,8 @@ function sb(ruta: string, init: RequestInit = {}) {
     cache: "no-store",
     headers: {
       apikey: KEY_SB!,
-      Authorization: `Bearer ${KEY_SB}`,
+      // claves viejas (JWT "eyJ…") van también como Bearer; las nuevas (sb_secret_…) solo como apikey
+      ...(KEY_SB!.startsWith("eyJ") ? { Authorization: `Bearer ${KEY_SB}` } : {}),
       "Content-Type": "application/json",
       Prefer: "return=representation",
       ...init.headers,

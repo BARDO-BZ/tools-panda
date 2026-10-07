@@ -81,7 +81,7 @@ resueltos.
 ```bash
 set -a && . ./.env.local && set +a
 curl -s "$NEXT_PUBLIC_SUPABASE_URL/rest/v1/comentarios?doc=eq.<cliente>/<slug>&estado=eq.pendiente&select=pieza,autor,texto,creado" \
-  -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY"
+  -H "apikey: $SUPABASE_SERVICE_ROLE_KEY"
 ```
 
 O más simple: abrir el link. La cabecera muestra el estado del mes.
