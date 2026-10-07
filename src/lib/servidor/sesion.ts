@@ -3,7 +3,9 @@ import { cache } from "react";
 import { cookies, headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import { createServerClient } from "@supabase/ssr";
+import { createClient } from "@supabase/supabase-js";
 import type { Perfil } from "@/lib/tipos";
+import { urlSitio } from "@/lib/sitio";
 import { almacen, conSupabase } from "./almacen";
 import { almacenLocal } from "./almacen-local";
 
@@ -68,7 +70,8 @@ export async function accesoA(cliente: string) {
 
 /** URL base del sitio (para los links de los mails) */
 export async function origen() {
-  if (process.env.SITE_URL) return process.env.SITE_URL.replace(/\/$/, "");
+  const fija = urlSitio();
+  if (fija) return fija;
   const h = await headers();
   const host = h.get("x-forwarded-host") ?? h.get("host");
   const proto = h.get("x-forwarded-proto") ?? (host?.startsWith("localhost") ? "http" : "https");
@@ -85,7 +88,12 @@ export async function enviarLink(email: string): Promise<{ linkLocal?: string }>
   if (!perfil) return {};
   const base = await origen();
   if (conSupabase) {
-    const sb = await supabaseSesion();
+    // flujo "implicit": el link sirve aunque se abra en otro dispositivo o navegador (el celular).
+    // Con la plantilla de fábrica vuelve con la sesión en el #fragmento → /auth/entrando la toma.
+    // Con la plantilla con {{ .TokenHash }} (requiere SMTP propio) vuelve con ?token_hash.
+    const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
+      auth: { flowType: "implicit", persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+    });
     const r = await sb.auth.signInWithOtp({ email: perfil.email, options: { shouldCreateUser: false, emailRedirectTo: `${base}/auth/confirmar` } });
     if (r.error) throw new Error(r.error.message);
     return {};

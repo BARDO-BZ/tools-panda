@@ -21,7 +21,7 @@ const flag = (n) => {
 const URL_SB = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const KEY_SB = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const sb = URL_SB && KEY_SB ? createClient(URL_SB, KEY_SB, { auth: { persistSession: false } }) : null;
-const SITIO = (process.env.SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+const SITIO = (process.env.SITE_URL?.trim() || "http://localhost:3000").replace(/\/$/, "");
 console.log(sb ? `Supabase: ${URL_SB}` : "Modo local: .data/");
 
 /* ── modo local: el mismo formato que src/lib/servidor/almacen-local.ts ── */

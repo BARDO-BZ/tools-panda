@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { IBM_Plex_Mono, Manrope } from "next/font/google";
+import { urlSitio } from "@/lib/sitio";
 import "./globals.css";
 
 // Tipografías del manual de Panda (BRANDING 2026):
@@ -13,9 +14,7 @@ const mondwest = localFont({ src: "./fonts/PPMondwest-Regular.otf", variable: "-
 const manrope = Manrope({ subsets: ["latin"], variable: "--f-texto", weight: ["400", "500", "700", "800"] });
 const mono = IBM_Plex_Mono({ subsets: ["latin"], variable: "--f-mono", weight: ["400", "500"] });
 
-const SITIO =
-  process.env.SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+const SITIO = urlSitio() ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITIO),

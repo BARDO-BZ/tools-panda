@@ -25,22 +25,19 @@ nadie se registra solo, los usuarios los crea el equipo.
 - Site URL: la URL de producción (ej. `https://clientes.panda.bz`)
 - Redirect URLs: agregar `https://clientes.panda.bz/auth/confirmar` y `http://localhost:3000/auth/confirmar`
 
-**Authentication → Emails → Templates**: cambiar el link de estas dos plantillas para que el
-link funcione aunque el mail se abra en otro dispositivo (el celular, por ejemplo):
+**Plantillas de mail: no hace falta tocarlas.** La app funciona con las de fábrica (el link
+vuelve a `/auth/confirmar` → `/auth/entrando`, que toma la sesión), también si el mail se abre
+en otro dispositivo. Supabase solo deja editarlas con SMTP propio.
 
-- **Magic Link**: `{{ .RedirectTo }}?token_hash={{ .TokenHash }}&type=email`
-- **Invite user**: `{{ .RedirectTo }}?token_hash={{ .TokenHash }}&type=invite`
+**SMTP propio (antes de invitar clientes).** El mail de fábrica de Supabase **solo manda a los
+miembros del equipo del proyecto en Supabase** y muy pocos por hora: sirve para probar con tu
+propio mail, no para clientes. En **Authentication → Emails → SMTP Settings** cargar un proveedor
+(Resend, Postmark o el SMTP de Google Workspace) con un remitente tipo `hola@panda.bz` (Resend
+pide verificar el dominio con registros DNS: se los pasa a Rama, como el CNAME).
 
-`{{ .RedirectTo }}` es la dirección que manda la app en cada pedido (`SITE_URL` + `/auth/confirmar`),
-así el mismo proyecto sirve para local y producción sin tocar nada. Por eso las dos URLs tienen
-que estar en *Redirect URLs*: si no, Supabase manda al Site URL del panel.
-
-De paso, traducir el asunto y el texto ("Entrá a Panda", "Te invitaron a Panda").
-
-**SMTP propio (antes de invitar clientes):** el mail que trae Supabase de fábrica manda muy
-pocos por hora y suele caer en spam. En **Authentication → Emails → SMTP Settings** cargar un
-proveedor (Resend, Postmark o el SMTP de Google Workspace) con un remitente tipo
-`hola@panda.bz`.
+Ya con SMTP, conviene traducir las plantillas (**Authentication → Emails → Templates**):
+asunto y texto en castellano ("Tu link para entrar a Panda", "Te invitaron a Panda"). El link
+puede quedar como está (`{{ .ConfirmationURL }}`).
 
 ## 4 · Variables
 
