@@ -2,12 +2,15 @@
 
 ## Para salir a producción
 
-- [ ] **Supabase de Panda**: crear el proyecto y seguir `SETUP-SUPABASE.md` (esquema, plantillas
-      de mail con `token_hash`, SMTP propio, variables).
-- [ ] **Proyecto de Vercel** conectado a `BARDO-BZ/tools-panda`, con las variables cargadas.
+- [x] **Supabase de Panda**: proyecto creado, esquema corrido, piloto de Sumatoria migrado.
+- [ ] **SMTP propio (Resend)** en Supabase → Authentication → Emails → SMTP Settings. Sin esto a
+      los clientes no les llega el mail. Después, traducir las plantillas de mail.
+- [ ] **Plan Pro de Supabase** antes de sumar clientes (el gratuito se pausa tras una semana sin uso).
+- [x] **Proyecto de Vercel** conectado a `BARDO-BZ/tools-panda`. Revisar que `SITE_URL` tenga la URL real.
 - [ ] **Subdominio**: elegir el nombre (ej. `clientes.panda.bz`) y pedir a Rama el CNAME en GoDaddy.
-- [ ] **Primer usuario del equipo** (`npm run admin -- crear-usuario … --rol panda`) y **migrar** el
-      piloto (`npm run admin -- migrar migracion`). Después, borrar `migracion/` del disco.
+- [x] **Primer usuario del equipo** (`hola@bardo.bz`) y piloto migrado. Falta borrar
+      `migracion/` del disco (ya está en Supabase).
+- [ ] **URL de Vercel** en Supabase → *Redirect URLs* (`…/auth/confirmar`) y en `SITE_URL` de Vercel.
 - [ ] **Tipografías PP con licencia web** (hoy son las "Free for Personal Use", igual que en propuestas).
 - [ ] Validar el piloto de Sumatoria con Valchi.
 
