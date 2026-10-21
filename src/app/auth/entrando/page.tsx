@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { createBrowserClient } from "@supabase/ssr";
 import s from "@/components/app/app.module.css";
@@ -10,8 +10,13 @@ import s from "@/components/app/app.module.css";
 // navegador puede leer. Se guarda en las cookies (las mismas que lee el servidor) y se entra.
 export default function Entrando() {
   const [error, setError] = useState(false);
+  // React (en desarrollo) corre los efectos dos veces: la segunda ya no encontraría los tokens
+  // (los borramos de la URL en la primera) y daría el link por vencido. Se procesa una sola vez.
+  const hecho = useRef(false);
 
   useEffect(() => {
+    if (hecho.current) return;
+    hecho.current = true;
     const h = new URLSearchParams(location.hash.slice(1));
     // sacar los tokens de la barra y del historial cuanto antes
     history.replaceState(null, "", location.pathname);

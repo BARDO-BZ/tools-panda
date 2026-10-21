@@ -4,6 +4,8 @@
 //   npm run admin -- crear-usuario --mail vos@panda.bz --nombre "Lara" --rol panda
 //   npm run admin -- crear-usuario --mail x@cliente.com --nombre "Matías" --carpeta sumatoria
 //   npm run admin -- migrar migracion          (sube los documentos de migracion/clientes/…)
+//   npm run admin -- link --mail vos@panda.bz  (link de acceso en la terminal, sin mandar mail:
+//                                               para cuando Supabase corta los envíos por hora)
 //
 // crear-usuario sirve sobre todo para el PRIMER usuario del equipo: después se crean desde
 // /panda/usuarios. En Supabase manda la invitación por mail; en local, se entra desde /entrar.
@@ -123,9 +125,24 @@ async function migrar() {
   }
 }
 
+// Link de acceso de un solo uso, impreso en la terminal (no manda mail). Solo para el usuario
+// que lo pide, en su compu: es una llave para entrar a esa cuenta, no se comparte.
+async function link() {
+  const email = flag("mail")?.toLowerCase();
+  if (!email) {
+    console.error("Uso: link --mail <mail>");
+    process.exit(1);
+  }
+  if (!sb) return console.log("En modo local el link aparece directo en /entrar.");
+  const r = await sb.auth.admin.generateLink({ type: "magiclink", email, options: { redirectTo: `${SITIO}/auth/confirmar` } });
+  if (r.error) throw new Error(r.error.message);
+  console.log(`\nAbrí este link en el navegador (vence en una hora, sirve una sola vez):\n\n${r.data.properties.action_link}\n`);
+}
+
 if (cmd === "crear-usuario") await crearUsuario();
+else if (cmd === "link") await link();
 else if (cmd === "migrar") await migrar();
 else {
-  console.error("Comandos: crear-usuario, migrar");
+  console.error("Comandos: crear-usuario, migrar, link");
   process.exit(1);
 }
